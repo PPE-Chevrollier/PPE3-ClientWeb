@@ -2,10 +2,10 @@
 require_once 'myPDO.class.php';
 
 class Connexion {
-	private $PARAM_hote = 'localhost'; // le chemin vers le serveur local (pour les tests) ou serveur de production (sur la ferme)
-	private $PARAM_utilisateur = 'root'; // nom d'utilisateur pour se connecter
-	private $PARAM_mot_passe = ''; // mot de passe de l'utilisateur pour se connecter
-	private $PARAM_nom_bd = 'bd_pp3_notagame'; // nom de ma base de donnees
+	private $PARAM_hote = '192.168.152.2'; // le chemin vers le serveur local (pour les tests) ou serveur de production (sur la ferme)
+	private $PARAM_utilisateur = 'notagame'; // nom d'utilisateur pour se connecter
+	private $PARAM_mot_passe = 'Azerty123'; // mot de passe de l'utilisateur pour se connecter
+	private $PARAM_nom_bd = 'bd_notagame'; // nom de ma base de donnees
 	
 	private $IDconnexion;
 	
