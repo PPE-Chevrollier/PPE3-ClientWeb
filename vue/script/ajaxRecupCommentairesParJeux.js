@@ -3,7 +3,6 @@
 */
 function jsClickRadioButton(){
 	//alert("click sur un radiobutton");
-	console.log("ready!");
 	var idJeu = 0;
 	// lorsque l'on clique sur un bouton d'option en face d'un jeu, on verifie lequel est coche et on recupere son id
 	$("input[type='radio']:checked").each(
@@ -35,16 +34,12 @@ function jsClickRadioButton(){
 	});
 	filterDataRequest.fail(function(jqXHR, textStatus) {
 			//alert("ERROR, jqXHR : "+ jqXHR.responseText + "textStatus : "+ textStatus );
-			console.log( "error" );
 			if (jqXHR.status === 0){alert("Not connect.n Verify Network.");}
-			else if (jqXHR.status == 404){alert("Requested page not found. [404]");}
-			else if (jqXHR.status == 500){alert("Internal Server Error [500].");}
+			else if (jqXHR.status === 404){alert("Requested page not found. [404]");}
+			else if (jqXHR.status === 500){alert("Internal Server Error [500].");}
 			else if (textStatus === "parsererror"){alert("Requested JSON parse failed.");}
 			else if (textStatus === "timeout"){alert("Time out error.");}
 			else if (textStatus === "abort"){alert("Ajax request aborted.");}
 			else{alert("Uncaught Error.n" + jqXHR.responseText);}
-		});
-		filterDataRequest.always(function() {
-			console.log( "complete" );
 		});
 }; /*FIN DE LA FONCTION jsClickRadioButton*/

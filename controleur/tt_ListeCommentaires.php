@@ -1,9 +1,11 @@
 <?php
 header('Content-Type: text/html;charset=UTF-8');
 require_once ('../modele/commentaireModele.class.php');
+require_once ('../modele/userModele.class.php');
 
 $json = array(); //tableau pour stocker les commentaires
 $monModele = new commentaireModele();
+$monModeleUser = new userModele();
 
 if (isset($_GET['idJV'])){
 	//requete presente dans le modele qui retourne les commentaires propres a un jeu.
@@ -18,7 +20,12 @@ else{
 foreach ($liste as $unCom) {
 // je remplis un tableau JSON avec juste le libelle du commentaire
     $index= $unCom->IDJV."-".$unCom->IDU; //pour ne pas avoir de doublons
-    $valeur = $unCom->LIBELLE;
+    
+    $tab = $monModeleUser->getUserPseudo($unCom->IDU);
+    
+    foreach ($tab as $tuple) $pseudo = $tuple->pseudo;
+    
+    $valeur = $unCom->LIBELLE . " - " . $pseudo;
 
     $json[$index] = ($valeur);
 

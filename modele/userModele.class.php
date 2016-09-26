@@ -50,4 +50,11 @@ class userModele {
 			return $result;
 		}
 	}
+        
+        public function getUserPseudo($id)
+        {
+            if ($this->IDC){
+                return $this->IDC->query("SELECT pseudo from users where idu=". $id .";");
+            }
+        }
 }
