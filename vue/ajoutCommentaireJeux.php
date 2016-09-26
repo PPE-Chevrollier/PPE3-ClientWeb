@@ -41,17 +41,16 @@ $pageIndex->contenu = '<section>
 		<fieldset>
 				<legend>Notation du jeu</legend>
 				<div>
-					<span>Choisir un jeu vid&eacute;o : </span><br/><label>';
+					<span>Choisir un jeu vid&eacute;o : </span><br/><label><select name="radioJV">';
 
 $JVMod = new JeuxVideosModele();
 $listeJV = $JVMod->getJeuxVideoS();
 
 foreach ($listeJV as $unJV){
-	// pour TESTER : echo "UN JEUX VIDEO : </br>";print_r($unJV);
-				$pageIndex->contenu .= '<input class="validate[required] radio" type="radio"  name="radioJV"  id="' . $unJV->IDJV. '"  value="' . $unJV->IDJV. '" /><span class="radio">' . $unJV->NOMJV . '-' .$unJV->ANNEESORTIE.'</span>';
+    $pageIndex->contenu .= '<option  id="' . $unJV->IDJV. '"  value="' . $unJV->IDJV. '" />' . $unJV->NOMJV . ' - ' . $unJV->ANNEESORTIE.'</option>';
 }
 				
-			$pageIndex->contenu .= '</label></div>
+			$pageIndex->contenu .= '</select></label></div>
 			<label>
 				<span>Commentaire : </span>
 				<textarea class="validate[required,length[10,500]] text-input" name="comments" id="comments" rows="15" cols="10"> </textarea>
