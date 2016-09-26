@@ -1,7 +1,7 @@
 <?php
 class pageBase {
     
-    private $style = array ('modele', 'gestionERREUR'); // mettre juste le nom du fichier SANS l'extension css
+    private $style = array ('modele', 'gestionErreur'); // mettre juste le nom du fichier SANS l'extension css
     private $script = array ('utile'); // mettre juste le nom du fichier SANS l'extension js
 
     private $motsCles;
