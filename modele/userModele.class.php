@@ -20,7 +20,7 @@ class userModele {
 		// ajoute ce contact dans la BDD
 		$nb = 0;
 		if ($this->IDC) {
-			$req = "INSERT INTO users(`email`, `pseudo`, `communaute`) VALUES  ('" . $email . "','" . $pseudo . "','" . $communaute . "');";
+			$req = "INSERT INTO users(`email`, `pseudo`, `idco`) VALUES  ('" . $email . "','" . $pseudo . "','" . $communaute . "');";
 			$nb = $this->IDC->exec ( $req );
 		}
 		return $nb; // si nb =1 alors l'insertion s est bien passee
