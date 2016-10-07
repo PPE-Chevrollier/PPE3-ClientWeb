@@ -3,6 +3,7 @@ session_start ();
 
 require_once ('../class/pageBase.class.php');
 require_once ('../class/pageSecurisee.class.php');
+require_once ('../modele/communauteModele.class.php');
 
 ?>	<script type="text/javascript">	cacher();</script>	<?php
 
@@ -26,18 +27,26 @@ $pageInscriptionUser->contenu = '<section>
 					<span>pseudo : </span>
 					<input  type="text" name="pseudo"  id="pseudo" />
 				</label>
-			<label>
-					<span>communaute : </span>
-					<input  type="text" name="communaute"  id="communaute" />
-				</label>
+			<span>Choisir une communauté : </span><label><select name="ListeCom">';
+
+                        $comMod = new communauteModele();
+                        $listeCom = $comMod->getCommunautes();
+
+                        foreach ($listeCom as $uneCom){
+                            $pageInscriptionUser->contenu .= '<option  id="' . $uneCom->IDCO. '"  value="' . $uneCom->IDCO. '" />' . $uneCom->LIBELLE . '</option>';
+                        }
+
+                        $pageInscriptionUser->contenu .= '</select></label></div>
 			</fieldset>
 				<p><input class="submit" type="submit" value="Valider" /></p>
 			</form>
 		</article>		
 	</section>';
-				
-				
-// TRAITEMENT du RETOUR DE L'ERREUR par le controleur
+                                               
+        $listeCom->closeCursor(); // pour lib�rer la m�moire occup�e par le r�sultat de la requ�te
+        $listeCom = null; // pour une autre ex�cution avec cette variable
+						
+//TRAITEMENT du RETOUR DE L'ERREUR par le controleur
 if (isset($_GET['error']) && !empty($_GET['error'])) {  
 	?>	<script type="text/javascript">	montrer();</script>	<?php
 	$pageInscriptionUser->contenu .= '<div id="infoERREUR"><h1>Informations !</h1><div id="dialog1" >'. $_GET['error'].'</div>';
@@ -49,4 +58,4 @@ if (isset($_GET['error']) && !empty($_GET['error'])) {
 		}
 }
 
-$pageInscriptionUser->afficher ();
+$pageInscriptionUser->afficher();
