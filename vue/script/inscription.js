@@ -13,16 +13,15 @@
       },
       messages: {
           email: {
-              required: "vous devez entrer un email",
+              required: "Vous devez entrer un email",
               email: "Cet email est invalide"
           },
           pseudo: {
-              required: "vous devez entrer un email",
-              minlength: "trop court",
-              maxlength: "trop long"
+              required: "Vous devez entrer un pseudo",
+              minlength: "Ce pseudo est trop court",
+              maxlength: "Ce pseudo est trop long"
           }
       }
-});
-
+   });
 });
  
