@@ -36,7 +36,7 @@ class jeuxVideosModele {
 		// recupere TOUS LES jeux vid�os de la BDD
 		if ($this->idcJV) {
                     
-                    $req ="SELECT je.IDJV,
+                    $req ="SELECT DISTINCT je.IDJV,
                     NOMJV,
                     ANNEESORTIE,
                     EDITEUR,
@@ -57,7 +57,7 @@ class jeuxVideosModele {
             if ($this->idcJV) {
 
                 $req ="
-                SELECT je.IDJV,
+                SELECT DISTINCT je.IDJV,
                 NOMJV,
                 ANNEESORTIE,
                 EDITEUR,

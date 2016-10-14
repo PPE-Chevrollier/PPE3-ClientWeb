@@ -27,7 +27,7 @@ $listeGenre = $GMod->getGenres();
 
 $pageConsultationJetC->contenu = '<section>
                                         <div id="filtre">
-                                            <form>
+                                            <form action="javascript:jsClickFiltrer()">
                                                 <fieldset>
                                                     <h4>Filtre par genre :</h4>';
 foreach ($listeGenre as $unG){
@@ -37,7 +37,7 @@ $pageConsultationJetC->contenu .= '                 <br/><br/><input type="submi
                                                 </fieldset>                                                
                                             </form>                                            
                                         </div>
-					<table>
+					<table id="tabJV">
 					<tr><th>Nom du jeu</th><th>ann&eacute;e de sortie</th><th>&eacute;diteur</th><th>genre(s)</th></tr>';
 //parcours du rï¿½sultat de la requete
 foreach ($listeJV as $unJV){

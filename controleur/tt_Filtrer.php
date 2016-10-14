@@ -4,19 +4,27 @@ require_once ('../modele/jeuxVideosModele.class.php');
 
 $monModele = new jeuxVideosModele();
 
-$idGenres = explode(",", $_GET['idGenres']);
+if ($_GET['idGenres'] == -1){
+    $Jeux = $monModele->getJeuxVideoS();
+}
+else{
+    $idGenres = explode(",", $_GET['idGenres']);
+    
+    $Jeux = $monModele->getJeuxVideoSGenres($idGenres);  
+}
 
-$tabJeux = $monModele->getJeuxVideoSGenres($idGenres);
 
+$tabJV = array();
 
-	
-
-
-
-
-
-$liste->closeCursor(); // pour liberer la memoire occupee par le resultat de la requete
-$liste = null; // pour une autre execution avec cette variable
+foreach ($Jeux as $unJeux)
+{
+    $tabJV[] = array(
+        "IDJV" => $unJeux->IDJV,
+        "NOMJV" => $unJeux->NOMJV,
+        "ANNEESORTIE" => $unJeux->ANNEESORTIE,
+        "EDITEUR" => $unJeux->EDITEUR,
+        "GENRE" => $unJeux->GENRE);
+}
 
 // envoi du resultat formate en json
-echo json_encode($json);
+echo json_encode($tabJV);

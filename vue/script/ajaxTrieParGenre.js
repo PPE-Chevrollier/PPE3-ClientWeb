@@ -17,19 +17,23 @@ function jsClickFiltrer(){
                     //alert ("id du jeu selectionné : "+ idJeu);
            }
         );
-        
-        var getD = '';
-        
-        for (var i=0; i < idGenres.length; i++) {
-            getD += idGenres[i];
-            if ((idGenres.length-1) !== i) getD+= ','; 
-        }
 
+        var getD = 'idGenres=-1';
+
+        if (idGenres.length !== 0){
+            getD = 'idGenres=';
+        
+            for (var i=0; i < idGenres.length; i++) {
+                getD += idGenres[i];
+                if ((idGenres.length-1) !== i) getD+= ','; 
+            }
+        }
+        
         //APPEL du fichier de traitement (ici : tt_ListeCommentaires.php) qui va récupérer les données et les renvoyer en JSON à cette page
         var filterDataRequest = $.ajax({
             url: '../controleur/tt_Filtrer.php',
             type: 'GET',
-            data: 'idGenres='+ getD, // on envoie le numero du jeu, on le testera avec $_GET['idJV']
+            data: getD, // on envoie le numero du jeu, on le testera avec $_GET['idJV']
             dataType: 'json'
         });
 
@@ -39,12 +43,12 @@ function jsClickFiltrer(){
             //alert("SUCCES : " + data);
             console.log("success");
             console.log(data);
-            $('#listeCom').append('<h3>Les commentaires du jeu sélectionné sont : </h3><ul>');
+            $('#tabJV').append('<tr><th>Nom du jeu</th><th>ann&eacute;e de sortie</th><th>&eacute;diteur</th><th>genre(s)</th></tr>');
             /*Pour afficher le tableau des commentaires retournés en JSON par la requête AJAX*/
              $.each(data, function(index, value) {
-                            $('#listeCom').append('<li>'+ value +'</li>');
+                            $('#tabJV').append('<tr><td>'+value["NOMJV"]+'</td><td>'+value["ANNEESORTIE"]+'</td><td>'+value["EDITEUR"]+'</td><td>'+value["GENRE"]+'</td><td><input type="radio" onclick="jsClickRadioButton();" name="nomidjv"  id="'+value["IDJV"]+'"  value="'+value["IDJV"]+'" /></td></tr>');
+                            
                             });	
-             $('#listeCom').append('</ul>');
 	});
         
 	filterDataRequest.fail(function(jqXHR, textStatus) {
