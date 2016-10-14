@@ -1,0 +1,16 @@
+h4 {
+    text-decoration: underline;
+}
+
+div #filtre {
+    margin-bottom: 20px;
+}
+
+#filtre input {
+    margin-left: 20px;
+}
+
+table {
+    text-align: center;
+    width: 100%;
+}
