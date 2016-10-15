@@ -41,7 +41,6 @@ function jsClickFiltrer(){
 	//une fois réceptionné les donnees en JSON
 	filterDataRequest.done(function(data) {
             $('#tabJV').text(""); //remise à blanc de la div
-            $('#listeCom').text(""); //remise à blanc de la div
             //alert("SUCCES : " + data);
             var isData = false;
             $('#tabJV').append('<tr><th>Nom du jeu</th><th>ann&eacute;e de sortie</th><th>&eacute;diteur</th><th>genre(s)</th></tr>');
