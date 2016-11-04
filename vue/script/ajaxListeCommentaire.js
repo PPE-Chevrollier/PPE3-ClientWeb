@@ -28,9 +28,9 @@ function jsChargementCommentaires(){
 			$('#tabCommentaires').text(""); //VIDE TOUS LES COMMENTAIRES EXISTANTS
 			
 			/*CHARGEMENT des COMMENTAIRES*/
-			$('#tabCommentaires').append('<tr><th>Commentaire</th></tr>');
+			$('#tabCommentaires').append('<tr><th>Commentaire</th><th>Refuser</th><th>Accepter</th></tr>');
 			 $.each(data, function(index, value) {
-				 $('#tabCommentaires').append('<tr><td>'+value+'</td><td><input type="radio" onclick="jsClickRadioButton();" name="idComm"  id="'+ index+'"  value="'+ index+'"/></td></tr>');
+				 $('#tabCommentaires').append('<tr><td>'+value+'</td><td><input type="radio" onclick="jsClickRadioButton(2);" name="idComm"  id="'+ index+'"  value="'+ index+'"/></td><td><input type="radio" onclick="jsClickRadioButton(1);" name="idComm2"  id="'+ index+'"  value="'+ index+'"/></td></tr>');
 			 		});	
 		});
 		filterDataRequest.fail(function(jqXHR, textStatus) {

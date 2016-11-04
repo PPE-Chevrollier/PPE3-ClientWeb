@@ -1,7 +1,7 @@
 /* JavaScript 
  * Copyright (c) 2016 F. de Robien
 */
-function jsClickRadioButton(){
+function jsClickRadioButton(validation){
 	//alert("click sur un radiobutton");
 	console.log("ready!");
 	var idJeu = 0;
@@ -20,9 +20,9 @@ function jsClickRadioButton(){
 
 		//APPEL du fichier de traitement (ici : tt_SupprCommentaire.php) qui va récupérer les données et les renvoyer en JSON à cette page
 		var filterDataRequest = $.ajax({
-			url: '../controleur/tt_SupprCommentaire.php',
+			url: '../controleur/tt_GestionCommentaire.php',
 			type: 'GET',
-			data: 'idU='+ idU + '&idJV='+ idJV, // on envoie le numero de l'utilisateur et du jeu, on le testera avec $_GET['idU'] et $_GET['idJV']
+			data: 'idU='+ idU + '&idJV='+ idJV + '&validation=' + validation, // on envoie le numero de l'utilisateur et du jeu, on le testera avec $_GET['idU'] et $_GET['idJV']
 			dataType: 'json'
 		});
 

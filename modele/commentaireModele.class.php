@@ -29,7 +29,7 @@ class commentaireModele {
 	public function getCommentaireS() {
 		// recupere TOUS LES commentaires de la BDD
 		if ($this->IDC) {
-			$result = $this->IDC->query ( "SELECT * from commentaire;" );
+			$result = $this->IDC->query ( "SELECT * from commentaire WHERE validation=0;" );
 			return $result;
 		}
 	}
@@ -37,14 +37,14 @@ class commentaireModele {
 	public function getCommentairesIdjv($idJ) {
 		// recupere TOUS LES commentaires  POUR UN JEU
 		if ($this->IDC) {
-			$result = $this->IDC->query ( "SELECT * from commentaire where idjv =".$idJ.";" );
+			$result = $this->IDC->query ( "SELECT * from commentaire where idjv =".$idJ." and validation=1;" );
 			return $result;
 		}
 	}
-	public function delete($idu,$idjv) {
-		//supression d'un commentaire � l'aide de ces 2 identifiants
+	public function update($idu,$idjv,$validation) {
+		//modification d'un commentaire l'aide de ces 2 identifiants
 		if ($this->IDC) {
-			$this->IDC->exec ( "DELETE FROM commentaire WHERE idu = ".$idu ." and idjv = ".$idjv.";");
+			$this->IDC->exec ( "UPDATE commentaire SET validation=".$validation ." WHERE idu = ".$idu ." and idjv = ".$idjv.";");
 		}
 	}
 	

@@ -8,11 +8,10 @@ $monModele = new commentaireModele ();
 if (isset($_GET['idU']) & isset($_GET['idJV'])){
 	//requete presente dans le modele qui supprime les commentaires avec la cle fournie
 	try{
-		$monModele->delete($_GET['idU'],$_GET['idJV']);
-		$json['success'] = ("SUCCESS : Suppression REUSSIE ! : <br/>");
+		$monModele->update($_GET['idU'],$_GET['idJV'], $_GET['validation']);
+		$json['success'] = ("SUCCESS : Commentaire retirée ! : <br/>");
 	} catch ( PDOException $pdoe ) {
 		$json['error'] = ("ERREUR : Suppression ECHOUEE ! : <br/>" . $pdoe->getMessage ());
 	}
 }
 echo json_encode($json);
-?>
