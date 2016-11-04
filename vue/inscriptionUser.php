@@ -21,16 +21,18 @@ $pageInscriptionUser->contenu = '<section>
                         
                             <fieldset>
                                 <legend>Utilisateur</legend>
-                                <span>
-                                    <label for="email">Email : </label>
+                                <div class="form">
+                                    <label for="email">Email &nbsp;:&nbsp; </label>
                                     <input type="text" name="email" id="email" class="email" />
-                                </span>		
-                                <span>
+                                </div>		
+                                <div class="form">
                                     <label for="pseudo">pseudo : </label>
                                     <input  type="text" name="pseudo"  id="pseudo" />
-                                </span>
-                                <span>Choisir une communautÃ© : </span>
-                                <select name="ListeCom">';
+                                </div>     
+                                <div class="form">
+                                    <label for = "ListeCom"> Choisir une communautÃ© : </label>
+                                    <select name="ListeCom" id="ListeCom">
+                                </div>';
 
                             $comMod = new communauteModele();
                             $listeCom = $comMod->getCommunautes();
