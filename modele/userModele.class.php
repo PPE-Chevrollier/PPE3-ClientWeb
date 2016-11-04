@@ -30,6 +30,8 @@ class userModele {
 		if ($this->IDC) {
 			$result = $this->IDC->query ( "SELECT idu from users where email='" . $email . "';" );
 			return $result;
+                        
+                        
 		}
 	}
 	
@@ -39,6 +41,9 @@ class userModele {
 		if ($this->IDC) {
 			$result = $this->IDC->query ( "SELECT * from users where email='" . $email . "' and pseudo='". $pseudo. "';" );
 			return $result;
+                        
+                        //$result = $this->IDC->prepare('SELECT * from users where email=? and pseudo=?;');
+                        
 		}
 		
 		

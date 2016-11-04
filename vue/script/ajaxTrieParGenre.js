@@ -30,11 +30,15 @@ function jsClickFiltrer(){
             }
         }
         
+        var colone = $("#colone option:selected").attr('value');
+        
+        var sens = $("input[type='radio']:checked").attr('value');
+        
         //APPEL du fichier de traitement (ici : tt_ListeCommentaires.php) qui va récupérer les données et les renvoyer en JSON à cette page
         var filterDataRequest = $.ajax({
             url: '../controleur/tt_Filtrer.php',
             type: 'GET',
-            data: getD, // on envoie le numero du jeu, on le testera avec $_GET['idJV']
+            data: getD+'&colone='+colone+'&sens='+sens, // on envoie le numero du jeu, on le testera avec $_GET['idJV']
             dataType: 'json'
         });
 
@@ -43,10 +47,10 @@ function jsClickFiltrer(){
             $('#tabJV').text(""); //remise à blanc de la div
             //alert("SUCCES : " + data);
             var isData = false;
-            $('#tabJV').append('<tr><th>Nom du jeu</th><th>ann&eacute;e de sortie</th><th>&eacute;diteur</th><th>genre(s)</th></tr>');
+            $('#tabJV').append('<tr><th>Nom du jeu</th><th>ann&eacute;e de sortie</th><th>&eacute;diteur</th><th>genre(s)</th><th>note moyenne</th></tr>');
             /*Pour afficher le tableau des commentaires retournés en JSON par la requête AJAX*/
              $.each(data, function(index, value) {
-                            $('#tabJV').append('<tr><td>'+value["NOMJV"]+'</td><td>'+value["ANNEESORTIE"]+'</td><td>'+value["EDITEUR"]+'</td><td>'+value["GENRE"]+'</td><td><input type="radio" onclick="jsClickRadioButton();" name="nomidjv"  id="'+value["IDJV"]+'"  value="'+value["IDJV"]+'" /></td></tr>');
+                            $('#tabJV').append('<tr><td>'+value["NOMJV"]+'</td><td>'+value["ANNEESORTIE"]+'</td><td>'+value["EDITEUR"]+'</td><td>'+value["GENRE"]+'</td><td>'+value["NOTE"]+'</td><td><input type="radio" onclick="jsClickRadioButton();" name="nomidjv"  id="'+value["IDJV"]+'"  value="'+value["IDJV"]+'" /></td></tr>');
                             isData = true;
                             });
              if (!isData) $('#tabJV').append('<tr><td colspan="4">Aucunes données</td></tr>');

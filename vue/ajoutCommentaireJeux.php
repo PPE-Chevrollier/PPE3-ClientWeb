@@ -14,34 +14,36 @@ if (isset ( $_SESSION ['idU'] ) && isset ( $_SESSION ['mdpU'] )) {
 //on ajoute les styles et les scripts n�cessaires pour la validation de ce formulaire
 $pageIndex->style = 'validationEngine.jquery';
 $pageIndex->style = 'template';
+$pageIndex->style = 'notationEtoile';
 $pageIndex->script = 'jquery';
-$pageIndex->script = 'jquery.validationEngine-fr';
 $pageIndex->script = 'jquery.validationEngine';
+$pageIndex->script = 'notationEtoile';
 
-?> <script type="text/javascript">	cacher();</script> <?php
-
-$pageIndex->contenu = '<section>
-		<article>
-			<form id="formNotationJV" class="formular" method="post" action="../controleur/tt_NotationJV.php">
-			<label>
-					<span>Date : (format YYYY-MM-DD)</span>
-					<input class="validate[required,custom[date]] text-input" type="text" name="date"  id="date" value="'. date("Y-m-d"). '"/>
-			</label>
-			<fieldset>
-				<legend>Utilisateur</legend>
-				<label>
-					<span>Email : </span>
-					<input class="validate[required,custom[email]] text-input" type="text" name="email" id="email"  />
-				</label>		
-				<label>
-					<span>pseudo : </span>
-					<input class="validate[required] text-input" type="text" name="pseudo"  id="pseudo" />
-				</label>
-			</fieldset>
-		<fieldset>
-				<legend>Notation du jeu</legend>
-				<div>
-					<span>Choisir un jeu vid&eacute;o : </span><br/><label><select name="radioJV">';
+$pageIndex->contenu = ' 
+<section>
+    <article>
+        <form id="formNotationJV" class="formular" method="post" action="../controleur/tt_NotationJV.php">
+            <div>
+                <label for="date">Date : (format YYYY-MM-DD)</label>
+                <input class="text-input" type="text" name="date"  id="date" value="'. date("Y-m-d"). '" disabled/>
+            </div>
+            <fieldset>
+                <legend>Utilisateur</legend>
+                <div>
+                        <label for="email">Email : </label>
+                        <input class="text-input" type="email" name="email" id="email" />
+                </div>		
+                <div>
+                        <label for="pseudo">pseudo : </label>
+                        <input class="text-input" type="text" name="pseudo" id="pseudo" />
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Notation du jeu</legend>
+                <div>
+                    <label for="radioJV">Choisir un jeu vid&eacute;o : </label><br/>
+                    <div>
+                        <select name="radioJV" id="radioJV">';
 
 $JVMod = new JeuxVideosModele();
 $listeJV = $JVMod->getJeuxVideoS();
@@ -50,25 +52,52 @@ foreach ($listeJV as $unJV){
     $pageIndex->contenu .= '<option  id="' . $unJV->IDJV. '"  value="' . $unJV->IDJV. '" />' . $unJV->NOMJV . ' - ' . $unJV->ANNEESORTIE.'</option>';
 }
 				
-			$pageIndex->contenu .= '</select></label></div>
-			<label>
-				<span>Commentaire : </span>
-				<textarea class="validate[required,length[10,500]] text-input" name="comments" id="comments" rows="15" cols="10"> </textarea>
-			</label>
-			</fieldset>
-		
-			<fieldset>
-				<legend>Conditions</legend>
-				<div class="infos">Je m\'engage &agrave; proposer des commentaires constructifs et non d&eacute;gradants</div>
-				<label>
-					<span class="checkbox">J\'accepte les conditions : </span>
-					<input class="validate[required] checkbox" type="checkbox"  id="agree"  name="agree"/>
-				</label>
-			</fieldset>
-			<p><input class="submit" type="submit" value="Valider" /></p>
-			<hr/>
-		</form>
-	</article>		
+			$pageIndex->contenu .= '
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label for="comments">Commentaire : </label>
+                    <textarea class="text-input" name="comments" id="comments" rows="15" cols="10"></textarea>
+                </div>
+                <div>
+                    <label for="notationEtoile">Choisissez une note : </label>
+                    <ul class="notes-echelle" id="notationEtoile">
+                        <li>
+                                <label for="note01" title="Note&nbsp;: 1 sur 5">1</label>
+                                <input type="radio" name="notesA" id="note01" value="1" />
+                        </li>
+                        <li>
+                                <label for="note02" title="Note&nbsp;: 2 sur 5">2</label>
+                                <input type="radio" name="notesA" id="note02" value="2" />
+                        </li>
+                        <li>
+                                <label for="note03" title="Note&nbsp;: 3 sur 5">3</label>
+                                <input type="radio" name="notesA" id="note03" value="3" />
+                        </li>
+                        <li>
+                                <label for="note04" title="Note&nbsp;: 4 sur 5">4</label>
+                                <input type="radio" name="notesA" id="note04" value="4" />
+                        </li>
+                        <li>
+                                <label for="note05" title="Note&nbsp;: 5 sur 5">5</label>
+                                <input type="radio" name="notesA" id="note05" value="5" />
+                        </li>
+                    </ul>
+                </div>
+            </fieldset>		
+            <fieldset>
+                <legend>Conditions</legend>
+                <div class="infos">Je m\'engage &agrave; proposer des commentaires constructifs et non d&eacute;gradants</div>
+                <div>
+                    <span class="checkbox">J\'accepte les conditions : </span>
+                    <input class="validate[required] checkbox" type="checkbox"  id="agree"  name="agree"/>
+                </div>
+            </fieldset>
+            <p><input class="submit" type="submit" value="Valider" /></p>
+            <hr/>
+        </form>
+    </article>		
 </section>';
 				
 $listeJV->closeCursor (); // pour lib�rer la m�moire occup�e par le r�sultat de la requ�te

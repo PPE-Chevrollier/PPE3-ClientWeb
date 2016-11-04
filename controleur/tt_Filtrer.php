@@ -3,15 +3,17 @@ header('Content-Type: text/html;charset=UTF-8');
 require_once ('../modele/jeuxVideosModele.class.php');
 
 $monModele = new jeuxVideosModele();
-
+/*
 if ($_GET['idGenres'] == -1){
     $Jeux = $monModele->getJeuxVideoS();
 }
-else{
-    $idGenres = explode(",", $_GET['idGenres']);
+else{*/
+    $idGenres = -1;
+
+    if ($_GET['idGenres'] != -1) $idGenres = explode(",", $_GET['idGenres']);
     
-    $Jeux = $monModele->getJeuxVideoSGenres($idGenres);  
-}
+    $Jeux = $monModele->getJeuxVideos($idGenres, $_GET['colone'], $_GET['sens']);
+//}
 
 
 $tabJV = array();
@@ -23,7 +25,8 @@ foreach ($Jeux as $unJeux)
         "NOMJV" => $unJeux->NOMJV,
         "ANNEESORTIE" => $unJeux->ANNEESORTIE,
         "EDITEUR" => $unJeux->EDITEUR,
-        "GENRE" => $unJeux->GENRE);
+        "GENRE" => $unJeux->GENRE,
+        "NOTE" => $unJeux->NOTE);
 }
 
 // envoi du resultat formate en json

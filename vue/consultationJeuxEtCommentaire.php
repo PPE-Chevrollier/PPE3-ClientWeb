@@ -23,9 +23,21 @@ $pageConsultationJetC->contenu = '<section>
                                         <div id="filtre">
                                             <form action="javascript:jsClickFiltrer()">
                                                 <fieldset>
+                                                    <h4>Trie :</h4>
+                                                    <div>
+                                                        <label for="colone">Trier par : </label>
+                                                        <select name="colone" id="colone">
+                                                            <option value="NOMJV">Nom du jeux</option>
+                                                            <option value="ANNEESORTIE">Année de sortie</option>
+                                                            <option value="EDITEUR">Editeur</option>
+                                                            <option value="NOTE">Note</option>
+                                                        </select>
+                                                        <input type="radio" name="sens" id="ASC" value="ASC" checked/><label for="ASC">Ascendant</label>
+                                                        <input type="radio" name="sens" id="DESC" value="DESC"/><label for="DESC">Descendant</label>
+                                                    </div>
                                                     <h4>Filtre par genre :</h4>
                                                     <div id="genres"></div>
-                                                    <br/><br/><input type="submit" value="Filtrer" onclick="jsClickFiltrer();"/>
+                                                    <br/><br/><input type="submit" value="Valider" onclick="jsClickFiltrer();"/>
                                                 </fieldset>                                                
                                             </form>                                            
                                         </div>
