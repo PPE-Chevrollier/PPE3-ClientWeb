@@ -1,6 +1,10 @@
 body{ margin:0; padding:0;}
 
 <!--gestion de la class formular pour le style des formulaires dans le site -->
+.error-message  { 
+        color : #ff5b5b; 
+        display:none; 
+}
 form.formular {
 	font-family: tahoma, verdana, "sans-serif";
 	font-size: 12px;

@@ -71,3 +71,12 @@
 	background-color: #ff8080; 
 }
 
+label.error {
+    margin-left : 20px;
+    color : red;
+    font-weight: bold;
+}
+
+div.form {
+    margin-top: 10px;
+}
