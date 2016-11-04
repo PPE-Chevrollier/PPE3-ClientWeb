@@ -30,7 +30,7 @@ if (isset($_POST['email']) && isset($_POST['pseudo'])) {
 				//pour traiter les eventuelles apostrophes dans la chaine des commentaires
 				$chaineCommentaire = addslashes($_POST ['comments']);
 				
-				$nb = $modeleCom->add($idU, $_POST['radioJV'], $chaineCommentaire);
+				$nb = $modeleCom->add($idU, $_POST['radioJV'], $chaineCommentaire, $_POST['notesA']);
 				$msgERREUR = "SUCCESS : AJOUT du commentaire reussi";
 			} catch (PDOException $pdoe) {
 				// cas ou 2 pseudo ont deja mis un commentaire sur un jeu

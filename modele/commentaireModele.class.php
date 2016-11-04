@@ -16,11 +16,11 @@ class commentaireModele {
 			echo "<h1>probleme access BDD</h1>";
 		}
 	}
-	public function add($idu,$idjv, $libelleCom) {
+	public function add($idu,$idjv, $libelleCom, $note) {
 		// ajoute ce contact dans la BDD
 		$nb = 0;
 		if ($this->IDC) {
-			$req = "INSERT INTO commentaire(`idu`, `idjv`, `libelle`) VALUES  ('" . $idu . "','" . $idjv . "','" . $libelleCom . "');";
+			$req = "INSERT INTO commentaire(`idu`, `idjv`, `libelle`, `note`) VALUES  ('" . $idu . "','" . $idjv . "','" . $libelleCom . "', '" . $note . "');";
 			$nb = $this->IDC->exec ( $req );
 		}
 		return $nb; // si nb =1 alors l'insertion s est bien passee
@@ -46,6 +46,5 @@ class commentaireModele {
 		if ($this->IDC) {
 			$this->IDC->exec ( "UPDATE commentaire SET validation=".$validation ." WHERE idu = ".$idu ." and idjv = ".$idjv.";");
 		}
-	}
-	
+	}	
 }

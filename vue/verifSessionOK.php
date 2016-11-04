@@ -4,7 +4,6 @@ include ('../class/autoload.php');
 
 
 $page= new pageBase ( "NotaGAME - Se Connecter" );
-?>	<script type="text/javascript">	cacher();</script>	<?php
 
 /* cas ou la session existe deja, donc il a clique sur se Deconnecter */
 if (isset ( $_SESSION ['idU'] ) && isset ( $_SESSION ['mdpU'] )) {
