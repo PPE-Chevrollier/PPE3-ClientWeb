@@ -31,7 +31,7 @@ class jeuxVideosModele {
 			return $resultID;
 		}
 	}
-        /*
+        
 	public function getJeuxVideoS() {
 		// recupere TOUS LES jeux vid?os de la BDD
 		if ($this->idcJV) {
@@ -52,8 +52,8 @@ class jeuxVideosModele {
                     return $resultJV;
 		}
 	}
-        */
-        public function getJeuxVideos($idGenres, $colone, $sens) {
+        
+        public function getJeuxVideoTrie($idGenres, $colone, $sens) {
             if ($this->idcJV) {
                 
                 $req ="
