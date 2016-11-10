@@ -3,15 +3,20 @@ header('Content-Type: text/html;charset=UTF-8');
 require_once ('../modele/commentaireModele.class.php');
 
 $json = array(); //tableau pour stocker les commentaires
-$monModele = new commentaireModele ();
+$monModele = new commentaireModele();
 
-if (isset($_GET['idU']) & isset($_GET['idJV'])){
-	//requete presente dans le modele qui supprime les commentaires avec la cle fournie
-	try{
-		$monModele->update($_GET['idU'],$_GET['idJV'], $_GET['validation']);
-		$json['success'] = ("SUCCESS : Commentaire retirée ! : <br/>");
-	} catch ( PDOException $pdoe ) {
-		$json['error'] = ("ERREUR : Suppression ECHOUEE ! : <br/>" . $pdoe->getMessage ());
-	}
+if (isset($_POST['idU']) & isset($_POST['idJV'])){
+    try{
+        $monModele->update($_POST['idU'],$_POST['idJV'], $_POST['validation']); //Changement de l'état du commentaire
+        
+        $type = "";
+        if ($_POST['validation'] == 2) $type = "refusé";
+        else $type = "accepté";
+        
+        $json['success'] = ("SUCCESS : Commentaire ".$type." ! : <br/>");
+    } catch ( PDOException $pdoe ) {
+        $json['error'] = ("ERREUR : mise à jour ECHOUEE ! : <br/>" . $pdoe->getMessage ());
+    }
 }
+
 echo json_encode($json);

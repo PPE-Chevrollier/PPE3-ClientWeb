@@ -1,20 +1,15 @@
 <?php
 header('Content-Type: text/html;charset=UTF-8');
+
 require_once ('../modele/jeuxVideosModele.class.php');
 
 $monModele = new jeuxVideosModele();
-/*
-if ($_GET['idGenres'] == -1){
-    $Jeux = $monModele->getJeuxVideoS();
-}
-else{*/
-    $idGenres = -1;
 
-    if ($_GET['idGenres'] != -1) $idGenres = explode(",", $_GET['idGenres']);
-    
-    $Jeux = $monModele->getJeuxVideoTrie($idGenres, $_GET['colone'], $_GET['sens'], $_GET['annee'], $_GET['editeur']);
-//}
+$idGenres = -1; //Valeur par default si pas de trie
 
+if ($_POST['idGenres'] != -1) $idGenres = explode(",", $_POST['idGenres']); //Recupération des id de genres dans un talbeau
+
+$Jeux = $monModele->getJeuxVideoTrie($idGenres, $_POST['colone'], $_POST['sens'], $_POST['annee'], $_POST['editeur']);
 
 $tabJV = array();
 

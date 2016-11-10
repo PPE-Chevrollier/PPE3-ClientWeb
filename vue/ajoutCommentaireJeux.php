@@ -6,9 +6,9 @@ require_once ('../class/pageSecurisee.class.php');
 require_once ('../modele/jeuxVideosModele.class.php');
 
 if (isset ( $_SESSION ['idU'] ) && isset ( $_SESSION ['mdpU'] )) {
-	$pageIndex = new pageSecurisee ( "Ajouter des commentaires sur un jeu..." );
+    $pageIndex = new pageSecurisee ( "Ajouter des commentaires sur un jeu..." );
 } else {
-	$pageIndex = new pageBase ( "Ajouter des commentaires sur un jeu..." );
+    $pageIndex = new pageBase ( "Ajouter des commentaires sur un jeu..." );
 }
 
 //on ajoute les styles et les scripts n�cessaires pour la validation de ce formulaire

@@ -11,12 +11,8 @@ class Connexion {
 	
 	public function __construct() {
             try {
-
                 $this->IDconnexion = new myPDO ('mysql:host=' . $this->PARAM_hote . ';dbname=' . $this->PARAM_nom_bd, $this->PARAM_utilisateur, $this->PARAM_mot_passe);
-                // Il faut ajouter pour gerer les accents et caracteres non utf8
                 $this->IDconnexion->exec('SET NAMES utf8');
-
-                //echo '<script>alert ("ok connex");</script>';
             } 
             catch (PDOException $e) {
                     echo 'hote: ' . $this->PARAM_hote . ' ' . $_SERVER ['DOCUMENT_ROOT'] . '<br />';

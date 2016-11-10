@@ -2,30 +2,14 @@
 class pageSecurisee extends pageBase {
     public function __construct($t) {
             parent::__construct ( $t );
+            $this->menu = ' <nav> 
+                    <ul>
+                            <a href=../vue/verifSessionOK.php>Déconnexion admin</a>
+                            <a href="inscriptionUser.php"><li>Inscription</li></a>
+                            <a href="consultationJeuxEtCommentaire.php"><li>Consultation des Commentaires par JV</li></a>
+                            <a href="ajoutCommentaireJeux.php"><li>Ajouter un commentaire</li></a>
+                            <a href="gestionCommentaire.php">Gestion des commentaires</a>
+                    </ul>
+                </nav>';
     }
-
-    /**
-     * ****************************Gestion de l'entête *********************************************
-     */
-    // REDEFINITON de l'entête par rapport à celui de page_base
-    protected function affiche_entete() {
-            echo $this->entete;
-            echo '<a href=../vue/verifSessionOK.php>Déconnexion</a>';
-    }
-
-    /**
-     * ****************************Gestion du menu *********************************************
-     */
-    // REDEFINITON du menu par rapport à celui de page_base
-    protected function affiche_menu() {
-            parent::affiche_menu ();
-            // on met ici les pages qui sont sécurisées
-            // on rajoute dans le MENU une nouvelle page !
-            ?>
-<ul>
-	<li><a href="supprCommentaire.php">Supprimer les commentaires</a></li>
-</ul>
-
-<?php
-	}
 }
