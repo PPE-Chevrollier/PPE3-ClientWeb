@@ -14,7 +14,7 @@ function jsClickRadioButton(){
 		//APPEL du fichier de traitement (ici : tt_ListeCommentaires.php) qui va récupérer les données et les renvoyer en JSON à cette page
 		var filterDataRequest = $.ajax({
 			url: '../controleur/tt_ListeCommentaires.php',
-			type: 'GET',
+			type: 'POST',
 			data: 'idJV='+ idJeu, // on envoie le numero du jeu, on le testera avec $_GET['idJV']
 			dataType: 'json'
 		});
@@ -22,19 +22,18 @@ function jsClickRadioButton(){
 	//une fois réceptionné les donnees en JSON
 	filterDataRequest.done(function(data) {
 		$('#listeCom').text(""); //remise à blanc de la div
-		//alert("SUCCES : " + data);
-		console.log("success");
-		console.log(data);
-		$('#listeCom').append('<h3>Les commentaires du jeu sélectionné sont : </h3><ul>');
-		/*Pour afficher le tableau des commentaires retournés en JSON par la requête AJAX*/
-		 $.each(data, function(index, value) {
-		 		$('#listeCom').append('<li>'+ value +'</li>');
-		 		});	
-		 $('#listeCom').append('</ul>');
+                
+                var listCom = '<h3>Les commentaires du jeu sélectionné sont : </h3><table id="tabCommentaires"><tr><th>Commentaire</th><th>Utilisateur</th></tr>';
+		
+		$.each(data, function(index, value) {
+                    listCom += '<tr><td>'+ value["LIBELLE"] + '</td><td>' + value["PSEUDO"] + '</td></tr>';
+                });	
+		
+                $('#listeCom').append(listCom+'</table>');
 	});
 	filterDataRequest.fail(function(jqXHR, textStatus) {
 			//alert("ERROR, jqXHR : "+ jqXHR.responseText + "textStatus : "+ textStatus );
-			if (jqXHR.status === 0){alert("Not connect.n Verify Network.");}
+			if (jqXHR.status === 0){alert("Not connectn Verify Network.");}
 			else if (jqXHR.status === 404){alert("Requested page not found. [404]");}
 			else if (jqXHR.status === 500){alert("Internal Server Error [500].");}
 			else if (textStatus === "parsererror"){alert("Requested JSON parse failed.");}

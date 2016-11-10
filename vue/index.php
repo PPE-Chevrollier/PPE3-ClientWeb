@@ -10,11 +10,10 @@ if (isset ( $_SESSION ['idU'] ) && isset ( $_SESSION ['mdpU'] )) {
     $pageIndex = new pageBase("Bienvenue sur NotaGAME...");
 }
 
-$pageIndex->contenu = '
-        <section>
-		<article>
-			<img src="./image/jeux-videos.jpeg" alt="photos des pochettes de jeux videos">
-		</article>
-	</section>';				
+$pageIndex->contenu = ' <section>
+                            <article>
+                                <img src="./image/jeux-videos.jpeg" alt="photos des pochettes de jeux videos">
+                            </article>
+                        </section>';				
 
 $pageIndex->afficher();

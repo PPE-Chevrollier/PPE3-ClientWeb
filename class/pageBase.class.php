@@ -8,7 +8,7 @@ class pageBase {
     private $description;
     private $titre;
     protected $entete;
-    private $menu;
+    protected $menu;
     private $contenu;
     private $piedpage;
     
@@ -17,14 +17,15 @@ class pageBase {
             $this->description = 'notation des jeux videos';
             $this->motsCles = 'jeux videos,note,geek,informatique';
             $this->entete = '<header><a href="index.php"><img src="./image/jeux-videos-logo.jpg" alt="photos des pochettes de jeux videos"></a> NOTAGAME : noter vos jeux vid&eacute;os pr&eacute;f&eacute;r&eacute;s</header>';
-            $this->menu = '<nav> 
-                    <ul>
-                            <a href="inscriptionUser.php"><li>s\'inscrire </li></a>
-                            <a href="consultationJeuxEtCommentaire.php"><li>Consultation des Commentaires par JV</li></a>
-                            <a href="ajoutCommentaireJeux.php"><li>Notation des jeux vidéos présents</li></a>
-                    </ul>
-            </nav>';
-            $this->piedpage = '<footer>copyright 1FO SIO 49 Chevrollier : 1fo.sio.49@gmail.com - technologies mises en oeuvre PHP objet - MVC - jquery - Ajax </footer>';
+            $this->menu = ' <nav> 
+                                <ul>
+                                    <a href=../vue/verifSessionOK.php>Connexion admin</a>
+                                    <a href="inscriptionUser.php"><li>s\'inscrire </li></a>
+                                    <a href="consultationJeuxEtCommentaire.php"><li>Consultation des Commentaires par JV</li></a>
+                                    <a href="ajoutCommentaireJeux.php"><li>Notation des jeux vidéos présents</li></a>
+                                </ul>
+                            </nav>';
+            $this->piedpage = '<footer>copyright 1FO SIO 49 Chevrollier : 1fo.sio.49@gmail.com - technologies mises en oeuvre PHP objet - MVC - jquery - Ajax</footer>';
     }
 
     public function __set($propriete, $valeur) {
@@ -65,8 +66,7 @@ class pageBase {
      */
     /* Insertion des mots clés */
     private function charge_motsCles() {
-            echo "<meta name='keywords' lang='fr' content='" . $this->motsCles . "' />";
-            echo ("\n");
+            echo "<meta name='keywords' lang='fr' content='" . $this->motsCles . "' />\n";
     }
 
     /**
@@ -74,8 +74,7 @@ class pageBase {
      */
     /* Insertion de la description du site */
     private function charge_description() {
-            echo "<meta name='description' content='" . $this->description . "'/>";
-            echo ("\n");
+            echo "<meta name='description' content='" . $this->description . "'/>\n";
     }
     /**
      * ****************************Gestion des styles *********************************************
@@ -101,7 +100,6 @@ class pageBase {
      */
     protected function affiche_entete() {
             echo $this->entete;
-            echo '<a href=../vue/verifSessionOK.php>Connexion</a>';
     }
     /**
      * ****************************Gestion de l'entete *********************************************

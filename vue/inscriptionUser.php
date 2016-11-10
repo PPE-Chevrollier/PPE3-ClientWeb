@@ -7,32 +7,31 @@ require_once ('../modele/communauteModele.class.php');
 
 
 if (isset ( $_SESSION ['idU'] ) && isset ( $_SESSION ['mdpU'] )) {
-	$pageInscriptionUser = new pageSecurisee ( "Inscription d'un utilisateur..." );
+    $pageInscriptionUser = new pageSecurisee ( "Inscription d'un utilisateur..." );
 } else {
-	$pageInscriptionUser = new pageBase ( "Inscription d'un utilisateur..." );
+    $pageInscriptionUser = new pageBase ( "Inscription d'un utilisateur..." );
 }
+
 $pageInscriptionUser->script = 'jquery';
 $pageInscriptionUser->script = 'jquery.validate.min';
 $pageInscriptionUser->script = 'inscription';
 
 $pageInscriptionUser->contenu = '<section>
-		<article>
-			<form id="formInscriptionUser" name="formInscriptionUser" method="post" action="../controleur/tt_InscriptionUser.php"> 
-                        
-                            <fieldset>
-                                <legend>Utilisateur</legend>
-                                <div class="form">
-                                    <label for="email">Email &nbsp;:&nbsp; </label>
-                                    <input type="text" name="email" id="email" class="email" />
-                                </div>		
-                                <div class="form">
-                                    <label for="pseudo">pseudo : </label>
-                                    <input  type="text" name="pseudo"  id="pseudo" />
-                                </div>     
-                                <div class="form">
-                                    <label for = "ListeCom"> Choisir une communautÃ© : </label>
-                                    <select name="ListeCom" id="ListeCom">
-                                </div>';
+                                    <article>
+                                        <form id="formInscriptionUser" name="formInscriptionUser" method="post" action="../controleur/tt_InscriptionUser.php"> 
+                                            <fieldset>
+                                                <legend>Utilisateur</legend>
+                                                <div class="form">
+                                                    <label for="email">Email &nbsp;:&nbsp; </label>
+                                                    <input type="text" name="email" id="email" class="email" />
+                                                </div>		
+                                                <div class="form">
+                                                    <label for="pseudo">pseudo : </label>
+                                                    <input  type="text" name="pseudo"  id="pseudo" />
+                                                </div>     
+                                                <div class="form">
+                                                    <label for = "ListeCom"> Choisir une communautÃ© : </label>
+                                                    <select name="ListeCom" id="ListeCom">';
 
                             $comMod = new communauteModele();
                             $listeCom = $comMod->getCommunautes();
@@ -41,12 +40,12 @@ $pageInscriptionUser->contenu = '<section>
                                 $pageInscriptionUser->contenu .= '<option  id="' . $uneCom->IDCO. '"  value="' . $uneCom->IDCO. '" />' . $uneCom->LIBELLE . '</option>';
                             }
 
-                            $pageInscriptionUser->contenu .= '</select>
-                            </fieldset>
-                                    <p><input class="submit" type="submit" value="Valider" /></p>
-			</form>
-		</article>		
-	</section>';
+                            $pageInscriptionUser->contenu .= '</select></div>
+                                            </fieldset>
+                                            <p><input class="submit" type="submit" value="Valider" /></p>
+                                        </form>
+                                    </article>		
+                                </section>';
                                                
         $listeCom->closeCursor(); // pour libï¿½rer la mï¿½moire occupï¿½e par le rï¿½sultat de la requï¿½te
         $listeCom = null; // pour une autre exï¿½cution avec cette variable

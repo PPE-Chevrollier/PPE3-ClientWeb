@@ -98,7 +98,7 @@ function jsClickFiltrer(){
         //APPEL du fichier de traitement (ici : tt_ListeCommentaires.php) qui va récupérer les données et les renvoyer en JSON à cette page
         var filterDataRequest = $.ajax({
             url: '../controleur/tt_Filtrer.php',
-            type: 'GET',
+            type: 'POST',
             data: getD+'&colone='+colone+'&sens='+sens+'&annee='+annee+'&editeur='+editeur, // on envoie le numero du jeu, on le testera avec $_GET['idJV']
             dataType: 'json'
         });

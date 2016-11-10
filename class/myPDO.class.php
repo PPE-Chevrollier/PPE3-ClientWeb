@@ -1,6 +1,5 @@
 <?php
 class myPDO extends PDO {
-	
 	public function __construct($dsn, $user = NULL, $password = NULL) {
 		parent::__construct ( $dsn, $user, $password );
 		// dire comment on veut traiter les erreurs ici gestion avec les exceptions try catch

@@ -5,13 +5,13 @@ class genreModele {
     private $idCom = null;
 
     public function __construct() {
-            // creation de la connexion afin d'executer les requetes
-            try {
-                $ConnexionJV = new Connexion();
-                $this->idCom = $ConnexionJV->IDconnexion;
-            } catch ( PDOException $e ) {
-                    echo "<h1>probleme access BDD</h1>";
-            }
+        // creation de la connexion afin d'executer les requetes
+        try {
+            $ConnexionJV = new Connexion();
+            $this->idCom = $ConnexionJV->IDconnexion;
+        } catch ( PDOException $e ) {
+                echo "<h1>probleme access BDD</h1>";
+        }
     }
     public function getGenres() {
         // recupere toutes les genres de la BDD
