@@ -17,7 +17,6 @@ $pageConsultationJetC->style = 'filtreJeux';
 $pageConsultationJetC->script ='jquery-3.0.0.min';
 $pageConsultationJetC->script = 'ajaxRecupCommentairesParJeux'; //pour gï¿½rer par l'AJAX le clic de la case ï¿½ cocher et afficher les commentaires correspondants
 $pageConsultationJetC->script = 'ajaxTrieParGenre';
-$pageConsultationJetC->script = 'ajaxRecupGenre';
 
 $pageConsultationJetC->contenu = '<section>
                                         <div id="filtre">
@@ -37,6 +36,10 @@ $pageConsultationJetC->contenu = '<section>
                                                     </div>
                                                     <h4>Filtre par genre :</h4>
                                                     <div id="genres"></div>
+                                                    <h4>Filtre par année de sortie :</h4>
+                                                    <div id="anneeSortie"></div>
+                                                    <h4>Filtre par éditeur :</h4>
+                                                    <div id="editeur"></div>
                                                     <br/><br/><input type="submit" value="Valider" onclick="jsClickFiltrer();"/>
                                                 </fieldset>                                                
                                             </form>                                            

@@ -12,7 +12,7 @@ else{*/
 
     if ($_GET['idGenres'] != -1) $idGenres = explode(",", $_GET['idGenres']);
     
-    $Jeux = $monModele->getJeuxVideoTrie($idGenres, $_GET['colone'], $_GET['sens']);
+    $Jeux = $monModele->getJeuxVideoTrie($idGenres, $_GET['colone'], $_GET['sens'], $_GET['annee'], $_GET['editeur']);
 //}
 
 

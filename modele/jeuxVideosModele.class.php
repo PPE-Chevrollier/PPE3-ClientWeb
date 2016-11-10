@@ -53,7 +53,9 @@ class jeuxVideosModele {
 		}
 	}
         
-        public function getJeuxVideoTrie($idGenres, $colone, $sens) {
+        public function getJeuxVideoTrie($idGenres, $colone, $sens, $anneeSortie, $editeur) {
+            $trieGenre = false;
+            $trieAnnee = false;
             if ($this->idcJV) {
                 
                 $req ="
@@ -72,27 +74,63 @@ class jeuxVideosModele {
                 INNER JOIN jeuxvideos j ON c.IDJV = j.IDJV
                 WHERE j.IDJV = je.IDJV AND c.validation = 1
                 GROUP BY j.IDJV) AS \"NOTE\"
-                FROM jeuxvideos je";
+                FROM jeuxvideos je
+                LEFT JOIN correspondre ce ON je.IDJV = ce.IDJV";
 
-                if ($idGenres != -1){
+                if ($idGenres != -1 || $anneeSortie != -1 || $editeur != -1)
+                {
+                    $req .= ' WHERE';
+                }
                     
+                
+                if ($idGenres != -1){
+                    $trieGenre = true;
                     $nb = count($idGenres);
                     $nbt = 0;
 
-                    $req .= ' LEFT JOIN correspondre ce ON je.IDJV = ce.IDJV WHERE';
+                    $req .= ' (';
 
                     foreach ($idGenres as $genre){
                         $nbt++;
                         $req .= ' ce.IDGENRE LIKE '.$genre;
                         if (($nb-1) == $nbt) $req.= ' OR';
-                    }                
+                    }
+                    
+                    $req .= ')';
+                }
+                
+                if ($anneeSortie != -1){
+                    if ($trieGenre) $req .= ' AND';
+                    
+                    $req .= ' je.ANNEESORTIE LIKE '.$anneeSortie;
+                    $trieAnnee = true;
+                }
+                
+                if ($editeur != -1){
+                    if ($trieAnnee || $trieGenre) $req .= ' AND';
+                    $req .= ' je.EDITEUR LIKE "'.$editeur.'"';
                 }
                 
                 $req .= ' ORDER BY UPPER('.$colone.') '.$sens;
                 
                 $resultJV = $this->idcJV->query($req);
-                return $resultJV;		
+                return $resultJV;
             }
         
+        }
+        
+        public function getAnnee() {
+        // recupere l'id du jeux videos correspondant ?  au nom et ? l'ann?e de sortie
+            if ($this->idcJV) {
+                return $this->idcJV->query('SELECT DISTINCT ANNEESORTIE FROM jeuxvideos ORDER BY ANNEESORTIE');
+            }	
+        }
+
+        public function getEditeur() {
+        // recupere l'id du jeux videos correspondant ?  au nom et ? l'ann?e de sortie
+            if ($this->idcJV) {
+                return $this->idcJV->query('SELECT DISTINCT EDITEUR FROM jeuxvideos ORDER BY UPPER(EDITEUR)');
+            }
+
         }
 }
