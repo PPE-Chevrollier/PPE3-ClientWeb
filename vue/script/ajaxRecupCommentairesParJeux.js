@@ -23,10 +23,10 @@ function jsClickRadioButton(){
 	filterDataRequest.done(function(data) {
 		$('#listeCom').text(""); //remise à blanc de la div
                 
-                var listCom = '<h3>Les commentaires du jeu sélectionné sont : </h3><table id="tabCommentaires"><tr><th>Commentaire</th><th>Utilisateur</th></tr>';
+                var listCom = '<h3>Les commentaires du jeu sélectionné sont : </h3><table id="tabCommentaires"><tr><th>Commentaire</th><th>Note</th><th>Utilisateur</th></tr>';
 		
 		$.each(data, function(index, value) {
-                    listCom += '<tr><td>'+ value["LIBELLE"] + '</td><td>' + value["PSEUDO"] + '</td></tr>';
+                    listCom += '<tr><td>'+ value["LIBELLE"] + '</td><td>' + value["NOTE"] + '</td><td>' + value["PSEUDO"] + '</td></tr>';
                 });	
 		
                 $('#listeCom').append(listCom+'</table>');

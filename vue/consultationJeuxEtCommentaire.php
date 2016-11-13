@@ -34,12 +34,14 @@ $pageConsultationJetC->contenu = '<section>
                                                         <input type="radio" name="sens" id="ASC" value="ASC" checked/><label for="ASC">Ascendant</label>
                                                         <input type="radio" name="sens" id="DESC" value="DESC"/><label for="DESC">Descendant</label>
                                                     </div>
-                                                    <h4>Filtre par genre :</h4>
-                                                    <div id="genres"></div>
                                                     <h4>Filtre par année de sortie :</h4>
                                                     <div id="anneeSortie"></div>
                                                     <h4>Filtre par éditeur :</h4>
                                                     <div id="editeur"></div>
+                                                    <h4>Filtre par genre :</h4>
+                                                    <div id="genres"></div>
+                                                    <h4>Filtre par support :</h4>
+                                                    <div id="supports"></div>
                                                     <br/><br/><input type="submit" value="Valider" onclick="jsClickFiltrer();"/>
                                                 </fieldset>                                                
                                             </form>                                            

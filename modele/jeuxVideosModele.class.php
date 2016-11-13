@@ -53,8 +53,9 @@ class jeuxVideosModele {
         }
     }
 
-    public function getJeuxVideoTrie($idGenres, $colone, $sens, $anneeSortie, $editeur) {
+    public function getJeuxVideoTrie($idGenres, $idSupports, $colone, $sens, $anneeSortie, $editeur) {
         $trieGenre = false;
+        $trieSupport = false;
         $trieAnnee = false;
         
         if ($this->idcJV) {
@@ -70,20 +71,26 @@ class jeuxVideosModele {
             INNER JOIN jeuxvideos j ON c.IDJV = j.IDJV
             WHERE j.IDJV = je.IDJV
             GROUP BY j.IDJV) AS \"GENRE\",
+            (SELECT GROUP_CONCAT(NOMS SEPARATOR ', ')
+            FROM compatible c 
+            INNER JOIN support s ON c.IDS = s.IDS
+            INNER JOIN jeuxvideos j ON c.IDJV = j.IDJV
+            WHERE j.IDJV = je.IDJV
+            GROUP BY j.IDJV) AS \"SUPPORT\",
             (SELECT ROUND(AVG(NOTE), 1)
             FROM commentaire c
             INNER JOIN jeuxvideos j ON c.IDJV = j.IDJV
             WHERE j.IDJV = je.IDJV AND c.validation = 1
             GROUP BY j.IDJV) AS \"NOTE\"
             FROM jeuxvideos je
-            LEFT JOIN correspondre ce ON je.IDJV = ce.IDJV";
+            LEFT JOIN correspondre ce ON je.IDJV = ce.IDJV
+            LEFT JOIN compatible co ON je.IDJV = co.IDJV";
 
-            if ($idGenres != -1 || $anneeSortie != -1 || $editeur != -1)
+            if ($idGenres != -1 || $idSupports != -1 || $anneeSortie != -1 || $editeur != -1)
             {
                 $req .= ' WHERE';
             }
-
-
+            
             if ($idGenres != -1){
                 $trieGenre = true;
                 $nb = count($idGenres);
@@ -99,16 +106,32 @@ class jeuxVideosModele {
 
                 $req .= ')';
             }
-
-            if ($anneeSortie != -1){
+            
+            if ($idSupports != -1){
                 if ($trieGenre) $req .= ' AND';
+                $trieSupport = true;
+                $nb = count($idSupports);
+                $nbt = 0;
 
+                $req .= ' (';
+
+                foreach ($idSupports as $support){
+                    $nbt++;
+                    $req .= ' co.IDS LIKE '.$support;
+                    if (($nb-1) == $nbt) $req.= ' OR';
+                }
+
+                $req .= ')';
+            }
+            
+            if ($anneeSortie != -1){
+                if ($trieAnnee || $trieGenre) $req .= ' AND';
                 $req .= ' je.ANNEESORTIE LIKE '.$anneeSortie;
                 $trieAnnee = true;
             }
 
             if ($editeur != -1){
-                if ($trieAnnee || $trieGenre) $req .= ' AND';
+                if ($trieAnnee || $trieGenre || $trieSupport) $req .= ' AND';
                 $req .= ' je.EDITEUR LIKE "'.$editeur.'"';
             }
 

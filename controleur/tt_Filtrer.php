@@ -5,11 +5,15 @@ require_once ('../modele/jeuxVideosModele.class.php');
 
 $monModele = new jeuxVideosModele();
 
-$idGenres = -1; //Valeur par default si pas de trie
+function toTab($champ){
+    $tab = -1; //Valeur par default si pas de trie
 
-if ($_POST['idGenres'] != -1) $idGenres = explode(",", $_POST['idGenres']); //Recupération des id de genres dans un talbeau
+    if ($champ != -1) $tab = explode(",", $champ); //Recupération des id de genres dans un talbeau
+    
+    return $tab;
+}
 
-$Jeux = $monModele->getJeuxVideoTrie($idGenres, $_POST['colone'], $_POST['sens'], $_POST['annee'], $_POST['editeur']);
+$Jeux = $monModele->getJeuxVideoTrie(toTab($_POST['idGenres']), toTab($_POST['idSupports']), $_POST['colone'], $_POST['sens'], $_POST['annee'], $_POST['editeur']);
 
 $tabJV = array();
 
@@ -21,6 +25,7 @@ foreach ($Jeux as $unJeux)
         "ANNEESORTIE" => $unJeux->ANNEESORTIE,
         "EDITEUR" => $unJeux->EDITEUR,
         "GENRE" => $unJeux->GENRE,
+        "SUPPORT" => $unJeux->SUPPORT,
         "NOTE" => $unJeux->NOTE);
 }
 
