@@ -16,8 +16,8 @@ class supportModele {
     public function getSupports() {
         // recupere toutes les genres de la BDD
         if ($this->idCom) {
-            $req = "SELECT DISTINCT c.IDS, NOMS FROM support s RIGHT JOIN compatible c ON s.IDS = c.IDS ORDER BY NOMS";
-            return $this->idCom->query($req);
+            $req = "";
+            return $this->idCom->query('SELECT DISTINCT c.IDS, NOMS FROM support s RIGHT JOIN compatible c ON s.IDS = c.IDS ORDER BY NOMS');
         }
     }
 }

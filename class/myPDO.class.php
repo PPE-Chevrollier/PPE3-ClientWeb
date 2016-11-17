@@ -16,5 +16,15 @@ class myPDO extends PDO {
 		$result = parent::query($sql);
 		$result->setFetchMode(PDO::FETCH_OBJ); // resultat de la requete retournee sous la forme d'objets
 		return $result;
-	}	
+        }
+        
+        public function prepare($sql, $options=NULL)
+        {
+            $statement = parent::prepare($sql);
+            if(strpos(strtoupper($sql), 'SELECT') === 0) //requête de type"SELECT"
+            {
+                $statement->setFetchMode(PDO::FETCH_OBJ);
+            }
+            return $statement;
+        }
 }

@@ -16,8 +16,7 @@ class communauteModele {
     public function getCommunautes() {
         // recupere toutes les communautés de la BDD
         if ($this->idCom) {
-            $req = "SELECT * from communaute ORDER BY idco;";
-            return $this->idCom->query($req);
+            return $this->idCom->query('SELECT * from communaute ORDER BY idco');
         }
     }
 }
