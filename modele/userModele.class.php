@@ -19,29 +19,37 @@ class userModele {
     public function add($email,$pseudo,$communaute) {
         // ajoute ce contact dans la BDD
         if ($this->IDC) {
-            $req = "INSERT INTO users(`email`, `pseudo`, `idco`) VALUES  ('" . $email . "','" . $pseudo . "','" . $communaute . "');";
-            $this->IDC->exec($req);
+            $result = $this->IDC->prepare('INSERT INTO users(`email`, `pseudo`, `idco`) VALUES  (:email, :pseudo, :communaute)');
+            $result->execute(Array(
+                "email" => $email,
+                "pseudo" => $pseudo,
+                "communaute" => $communaute
+            ));
         }
-        return;
+        return $result;
     }
     public function getID($email) {
         // recuperel'IDU de l'utilisateur grace � son email unique
         if ($this->IDC) {
-            $result = $this->IDC->query("SELECT IDU AS \"IDUSER\" FROM users WHERE email='" . $email . "'");
-            return $result;
+            $result = $this->IDC->prepare('SELECT IDU AS IDUSER FROM users WHERE email = :email');
+            $result->execute(Array(
+                "email" => $email
+            ));
         }
+        return $result;
     }
 
     public function getUser($email,$pseudo){
         //permet de savoir si un utilisateur existe avec cet email et ce pseudo
         //renvoie le nmbre d'utilisateur 1 s'il existe ou 0 sinon
         if ($this->IDC) {
-                $result = $this->IDC->query ( "SELECT * from users where email='" . $email . "' and pseudo='". $pseudo. "';" );
-                return $result;
-
-                //$result = $this->IDC->prepare('SELECT * from users where email=? and pseudo=?;');
-
+            $result = $this->IDC->prepare('SELECT * from users where email=:email and pseudo=:pseudo');
+            $result->execute(Array(
+                "email" => $email,
+                "pseudo" => $pseudo
+            ));
         }
+        return $result;
     }
     
     public function getUserS() {
@@ -55,7 +63,11 @@ class userModele {
     public function getUserPseudo($id)
     {
         if ($this->IDC){
-            return $this->IDC->query("SELECT pseudo from users where idu=". $id .";");
+            $result = $this->IDC->prepare('SELECT pseudo from users where idu=:id');
+            $result->execute(Array(
+                "id" => $id
+            ));
         }
+        return $result;
     }
 }

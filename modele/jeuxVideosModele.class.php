@@ -16,20 +16,26 @@ class jeuxVideosModele {
     }
     public function add($nomjv,$anneesortie,$classification,$editeur,$description) {
         // ajoute ce jeux videos dans la BDD
-        $nb = 0;
         if ($this->idcJV) {
-                $req = "INSERT INTO jeuxvideos(`nomjv`, `anneesortie`, `classification`, `editeur`,`description`) VALUES  ('" . $nomjv . "','" . $anneesortie . "','" . $classification . "');";
-                $nb = $this->idcJV->exec($req);
+            $result = $this->IDC->prepare('INSERT INTO jeuxvideos(`nomjv`, `anneesortie`, `classification`, `editeur`,`description`) VALUES  (:nomjv, :anneesortie, :classification)');
+            $result->execute(Array(
+                "nomjv" => $nomjv,
+                "anneesortie" => $anneesortie,
+                "classification" => $classification
+            ));
         }
-        return $nb; // si nb =1 alors l'insertion s est bien passee
+        return $result; // si nb =1 alors l'insertion s est bien passee
     }
     public function getID($nomjv,$anneesortie) {
         // recupere l'id du jeux videos correspondant ?  au nom et ? l'ann?e de sortie
         if ($this->idcJV) {
-                $req= "SELECT idjv from jeuxvideos where nomjv=" . $nomjv . " and anneesortie=". $anneesortie . ";" ;
-                $resultID = $this->idcJV->query($req);
-                return $resultID;
+            $result = $this->IDC->prepare('SELECT idjv from jeuxvideos where nomjv= :nomjv and anneesortie= :anneesortie');
+            $result->execute(Array(
+                "nomjv" => $nomjv,
+                "anneesortie" => $anneesortie
+            ));                
         }
+        return $result;
     }
 
     public function getJeuxVideoS() {
@@ -48,9 +54,10 @@ class jeuxVideosModele {
             GROUP BY j.IDJV) AS \"GENRE\"
             FROM jeuxvideos je;";
 
-            $resultJV = $this->idcJV->query($req);
-            return $resultJV;
+            $resultJV = $this->idcJV->query($req);           
+            
         }
+        return $resultJV;
     }
 
     public function getJeuxVideoTrie($idGenres, $idSupports, $colone, $sens, $anneeSortie, $editeur) {

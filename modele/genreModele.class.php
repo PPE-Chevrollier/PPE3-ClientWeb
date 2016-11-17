@@ -16,8 +16,7 @@ class genreModele {
     public function getGenres() {
         // recupere toutes les genres de la BDD
         if ($this->idCom) {
-            $req = "SELECT DISTINCT c.IDGENRE, LIBELLE FROM genre s RIGHT JOIN correspondre c ON s.IDGENRE = c.IDGENRE ORDER BY LIBELLE";
-            return $this->idCom->query($req);
+            return $this->idCom->query('SELECT DISTINCT c.IDGENRE, LIBELLE FROM genre s RIGHT JOIN correspondre c ON s.IDGENRE = c.IDGENRE ORDER BY LIBELLE');
         }
     }
 }
